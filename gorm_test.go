@@ -75,3 +75,16 @@ func TestSqlRow(t *testing.T) {
 	}
 	assert.Equal(t, 4, len(samples))
 }
+
+func TestScanRow(t *testing.T) {
+	rows, err := db.Raw("select id, name from sample").Rows()
+	assert.Nil(t, err)
+	defer rows.Close()
+
+	var samples []Sample
+	for rows.Next() {
+		err := db.ScanRows(rows, &samples)
+		assert.Nil(t, err)
+	}
+	assert.Equal(t, 4, len(samples))
+}
