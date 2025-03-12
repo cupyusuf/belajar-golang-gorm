@@ -23,3 +23,17 @@ var db = OpenConnection()
 func TestOpenConnection(t *testing.T) {
 	assert.NotNil(t, db)
 }
+
+func TestExecuteSQL(t *testing.T) {
+	err := db.Exec("insert into sample(id, name) values (?, ?)", "1", "Yusuf").Error
+	assert.Nil(t, err)
+
+	err = db.Exec("insert into sample(id, name) values (?, ?)", "2", "Firlana").Error
+	assert.Nil(t, err)
+
+	err = db.Exec("insert into sample(id, name) values (?, ?)", "3", "Supriadi").Error
+	assert.Nil(t, err)
+
+	err = db.Exec("insert into sample(id, name) values (?, ?)", "4", "Luchiana").Error
+	assert.Nil(t, err)
+}
