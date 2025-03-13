@@ -40,3 +40,13 @@ create table user_logs
 
 select *
 from user_logs;
+
+delete from user_logs;
+
+alter table user_logs modify created_at bigint not null;
+
+alter table user_logs modify updated_at bigint not null;
+
+select * from user_logs;
+
+desc user_logs;
