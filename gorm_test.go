@@ -209,3 +209,11 @@ func TestQuerySingleObject(t *testing.T) {
 	assert.Nil(t, err)
 	assert.Equal(t, "9", user.ID)
 }
+
+func TestQuerySingleObjectInlineCondition(t *testing.T) {
+	user := User{}
+	err := db.Take(&user, "id = ?", "5").Error
+	assert.Nil(t, err)
+	assert.Equal(t, "5", user.ID)
+	assert.Equal(t, "User 5", user.Name.FirstName)
+}
