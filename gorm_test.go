@@ -197,3 +197,15 @@ func TestManualTransactionError(t *testing.T) {
 		tx.Commit()
 	}
 }
+
+func TestQuerySingleObject(t *testing.T) {
+	user := User{}
+	err := db.First(&user).Error
+	assert.Nil(t, err)
+	assert.Equal(t, "1", user.ID)
+
+	user = User{}
+	err = db.Last(&user).Error
+	assert.Nil(t, err)
+	assert.Equal(t, "9", user.ID)
+}
