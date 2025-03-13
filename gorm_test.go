@@ -822,3 +822,18 @@ func TestMigrator(t *testing.T) {
 	err := db.Migrator().AutoMigrate(&GuestBook{})
 	assert.Nil(t, err)
 }
+
+func TestHook(t *testing.T) {
+	user := User{
+		Password: "password",
+		Name: Name{
+			FirstName: "User 100",
+		},
+	}
+
+	err := db.Create(&user).Error
+	assert.Nil(t, err)
+	assert.NotEqual(t, "", user.ID)
+
+	fmt.Println(user.ID)
+}
